@@ -1,0 +1,45 @@
+<li>
+
+ <% @em.each do |x| %>
+<ul><%= x %></ul>
+<% end %>
+
+</li>
+<%= form_tag '/login', method: :posts do %>
+  <p>
+  <%= radio_button_tag :contactmethod, 'admin', :checked => true %> 
+  <%= label :contactmethod_admin, 'Admin' %>
+  <%= radio_button_tag :contactmethod, 'others' %>
+  <%= label :contactmethod_others, 'Others'%>
+	</br>
+    <%= label_tag :Email %>
+    <%= email_field_tag :eml %>
+    <%= label_tag :Password %>
+    <%= password_field_tag :pwd %>
+    <%= submit_tag("Login") %>  
+ </p>
+<% end %>
+
+<%= form_tag '/create', method: :post do %>
+<br>
+<p>New User?</p>
+  <p>
+    <%= label_tag :First_Name %>
+    <%= text_field_tag :fn %>
+    <%= label_tag :Last_Name %>
+    <%= text_field_tag :ln %>
+ </p>
+<p>
+    <%= label_tag :Email %>
+    <%= email_field_tag :em %>
+</p>
+<p>
+    <%= label_tag :Password %>
+    <%= password_field_tag :pw %> 
+</p>
+<p>
+    <%= label_tag :Password %>
+    <%= password_field_tag :cpw %> 
+</p>
+<%= submit_tag("Register")%>
+<% end %>
