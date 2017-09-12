@@ -21,6 +21,13 @@ def compute_hash(password, salt)
     digestor.hexdigest(reply)
   end
 end
+def select
+	if(params[:contactmethod]=='add_mov') 
+		redirect_to controller: 'addmov', action: '_addmov',id: session[:id]
+	end
+
+end
+
 
 def create
    salt = rand(10000)
@@ -69,6 +76,7 @@ end
 def login
     @a2 = Admin.new
     ema = params[:eml]
+    #id1 = Admin.where(:email=>ema)
     @errarr=[]
     if(params[:contactmethod]=='admin') 
     	check = Admin.where(:email=>ema)
@@ -82,7 +90,8 @@ def login
 			pass2 = compute_hash(pass1,salt1.to_s)
 			#puts(pass2)
 				if pass2.eql?(check[0].pass)
-					redirect_to action:'admin'
+					session[:id] =  check[0].id
+					redirect_to action: 'admin',id: session[:id]
 				else
 					@errarr.push 'Incorrect Password'
 					session[:em] = @errarr	

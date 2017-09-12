@@ -1,3 +1,12 @@
-<h1>
-Hello admin
-</h1>
+<%= form_tag '/select', method: :posts do %>
+  <p>
+  <%= radio_button_tag :contactmethod, 'add_mov', :checked => true %> 
+  <%= label :contactmethod_add_mov, 'Add Movies' %>
+  <%= radio_button_tag :contactmethod, 'verify_mov' %>
+  <%= label :contactmethod_verify_mov, 'Verify Movies'%>
+  <%= radio_button_tag :contactmethod, 'review_comments' %>
+  <%= label :contactmethod_review_comments, 'Review Comments'%>
+	</br>
+    <%= submit_tag("OK") %>  
+ </p>
+<% end %>
