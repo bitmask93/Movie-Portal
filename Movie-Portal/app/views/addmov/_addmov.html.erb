@@ -1,10 +1,18 @@
 <%= form_tag '/create', method: :post do %>
 <br>
-<p>New User?</p>
+<p>Welcome
+<% 
+a1 = session[:id] 
+check = Admin.where(:id=>a1)
+puts(check[0].fname)
+%>
+<%= check[0].fname %>
+<%= check[0].lname %> 
+</p>
   <p>
-    <%= label_tag :First_Name %>
-    <%= text_field_tag :fn %>
-    <%= label_tag :Last_Name %>
+    <%= label_tag :Movie_Name %>
+    <%= text_field_tag :mn %></br></br>
+    <%= label_tag :Cast_Names %>
     <%= text_field_tag :ln %>
  </p>
 <p>

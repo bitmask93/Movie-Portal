@@ -24,6 +24,8 @@ end
 def select
 	if(params[:contactmethod]=='add_mov') 
 		redirect_to controller: 'addmov', action: '_addmov',id: session[:id]
+	elsif(params[:contactmethod]=='add_act') 
+		redirect_to controller: 'actors', action: 'addactors',id: session[:id]
 	end
 
 end

@@ -1,7 +1,17 @@
 <%= form_tag '/select', method: :posts do %>
+<p>Welcome
+<% 
+a1 = session[:id] 
+check = Admin.where(:id=>a1)
+%>
+<%= check[0].fname %>
+<%= check[0].lname %>
+</p>
   <p>
   <%= radio_button_tag :contactmethod, 'add_mov', :checked => true %> 
   <%= label :contactmethod_add_mov, 'Add Movies' %>
+  <%= radio_button_tag :contactmethod, 'add_act' %>
+  <%= label :contactmethod_verify_mov, 'Add Actors'%>
   <%= radio_button_tag :contactmethod, 'verify_mov' %>
   <%= label :contactmethod_verify_mov, 'Verify Movies'%>
   <%= radio_button_tag :contactmethod, 'review_comments' %>

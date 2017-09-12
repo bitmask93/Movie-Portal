@@ -1,0 +1,23 @@
+<%= form_tag '/addact', method: :post do %>
+<br>
+<p>Add Actors
+<% 
+a1 = session[:id] 
+check = Admin.where(:id=>a1)
+puts(check[0].fname)
+%>
+<%= check[0].fname %>
+<%= check[0].lname %> 
+</p>
+  <p>
+    <%= label_tag :Actor_First_Name %>
+    <%= text_field_tag :afn %></br></br>
+    <%= label_tag :Actor_Last_Name %>
+    <%= text_field_tag :aln %></br></br>
+    <%= label_tag :Date_Of_Birth %>
+    <%= text_field_tag :dob %></br></br>
+    <%= label_tag :Actor_Details %>
+    <%= text_area_tag :details %></br></br>
+ </p>
+<%= submit_tag("Add Actor") %>
+<% end %>
