@@ -1,4 +1,4 @@
-<%= form_tag '/create', method: :post do %>
+<%= form_tag '/_addmov', method: :post do %>
 <br>
 <p>Welcome
 <% 
@@ -12,20 +12,40 @@ puts(check[0].fname)
   <p>
     <%= label_tag :Movie_Name %>
     <%= text_field_tag :mn %></br></br>
-    <%= label_tag :Cast_Names %>
-    <%= text_field_tag :ln %>
+    <%= label_tag :Casts %>
+    <%= text_field_tag :act %>
  </p>
 <p>
-    <%= label_tag :Email %>
-    <%= email_field_tag :em %>
+    <%= label_tag :Date_Of_Release %>
+    <%= date_field_tag :dor %>
 </p>
 <p>
-    <%= label_tag :Password %>
-    <%= password_field_tag :pw %> 
+    <%= label_tag :Trailer_Link %>
+    <%= text_field_tag :video %> 
 </p>
 <p>
-    <%= label_tag :Password %>
-    <%= password_field_tag :cpw %> 
+    <%= label_tag :Runtime %>
+    <%= text_field_tag :duration %> 
+</p>
+<p>
+    <%= label_tag :Genre_1 %>
+    <%= text_field_tag :gen1 %> 
+</p>
+<p>
+    <%= label_tag :Genre_2 %>
+    <%= text_field_tag :gen2 %> 
+</p>
+<p>
+    <%= label_tag :Trailer_Link %>
+    <%= text_field_tag :video %> 
+</p>
+<p>
+    <%= label_tag :Synopsis %>
+    <%= text_area_tag :description %> 
+</p>
+<p>
+    Add Photo
+    <%= file_field_tag :picture %>
 </p>
 <%= submit_tag("Register")%>
 <% end %>

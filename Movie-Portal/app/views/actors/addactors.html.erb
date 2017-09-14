@@ -1,4 +1,12 @@
-<%= form_tag '/addact', method: :post do %>
+<li>
+
+ <% @em.each do |x| %>
+<ul><%= x %></ul>
+<% end %>
+
+</li>
+
+<%= form_tag '/addactors', method: :post , :multipart=>true do %>
 <br>
 <p>Add Actors
 <% 
@@ -11,13 +19,14 @@ puts(check[0].fname)
 </p>
   <p>
     <%= label_tag :Actor_First_Name %>
-    <%= text_field_tag :afn %></br></br>
+    <%= text_field_tag :fname %></br></br>
     <%= label_tag :Actor_Last_Name %>
-    <%= text_field_tag :aln %></br></br>
+    <%= text_field_tag :lname %></br></br>
     <%= label_tag :Date_Of_Birth %>
     <%= text_field_tag :dob %></br></br>
     <%= label_tag :Actor_Details %>
-    <%= text_area_tag :details %></br></br>
+    <%= text_area_tag :notes %></br></br>
+     Add Photo <%= file_field_tag :picture %>
  </p>
 <%= submit_tag("Add Actor") %>
 <% end %>
