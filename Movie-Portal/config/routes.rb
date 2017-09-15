@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   get 'admin/addmov'=> 'addmov#_addmov'
   get 'admin/actors'=> 'actors#addactors'
   post '_addmov' => 'addmov#_addmov'
+
+  get '_addmov' => 'addmov#_addmov'
+
 get 'addactors'=>'actors#addactors'  
 post 'addactors' => 'actors#addactors'
 root 'welcome#index'

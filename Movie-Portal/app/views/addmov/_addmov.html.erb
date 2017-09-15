@@ -1,3 +1,11 @@
+<li>
+
+ <% @em.each do |x| %>
+<ul><%= x %></ul>
+<% end %>
+
+</li>
+
 <%= form_tag '/_addmov', method: :post do %>
 <br>
 <p>Welcome
