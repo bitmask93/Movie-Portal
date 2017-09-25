@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<title>MOVIE PORTAL</title>
+<head>
+<!----vendor css---->
+<!--vendor javascript-->
+
+</head>
+
+</head>
+<body>
+<div class="wrap">
+<!--<div id="logo"></div>-->
+
+  <div id="nav">
+<ul>
+
+<% if(session[:id].nil?) %>
+<li><a href="login" class="Button">login</a></li>
+<li class="Button"><a><%= link_to 'Home' ,controller: 'welcome', action: 'index'%></a></li>
+<li class="Button"><%= link_to 'Back', :back %></li>
+<li class="Button"> <%= link_to 'Movie List' ,controller: 'view', action: 'viewall'%></li> 
+<li class="Button"><a><%= form_tag 'srch', method: :post do %>
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <%= text_field_tag :tags  %>
+
+<%= submit_tag("Search") %>  <% end %>
+</a></li>  
+</div>  
+<div id="search">
+<h2>
+~~~~~~~Search Results~~~~~~~~~
+</h2>
+<% if(params[:tags].nil?) %>
+<% else %>
+<% 
+if(params[:tags].size == 0)
+%>
+<h2>Enter a valid string</h2>
+<% else %>
+<h1>Movies :</h1>
+<% 
+puts(params[:tags])
+check = Movie.where("mn like?", "%#{params[:tags]}%" ) 
+
+if(check.size == 0)
+%>
+<p>No Results in Movie Database</p>
+<% 
+else 
+check.each do |x|
+%>
+
+<a href ="/view/viewmov?id=<%= x.id %>" > <img src="<%= "/"+ x.photo %>" style = "width:50px;height:50px;border:1px solid black;" ></img>
+<%= x.mn %><br/>
+</a>
+
+<% end %>
+<% end %>
+
+
+
+<h1>Actors :</h1>
+<% 
+fn1 = params[:tags].split(' ')[0]
+fn2 = params[:tags].split(' ')[1]
+if(fn2.nil?)
+  check1 = Cast.where("fname like?", "%#{fn1}%")
+if(check1.size==0)
+   check1 = Cast.where("lname like ?", "%#{fn1}%" )  
+    end
+else
+	check1 = Cast.where("fname like? or lname like ?", "%#{fn1}%", "%#{fn2}%")
+end
+
+if(check1.size == 0)
+%>
+<p>No Results in Actor Database</p>
+<% 
+else 
+check1.each do |x|
+%>
+<a href = "/view/viewact?id=<%= x.id %>" >
+<%= x.fname %>
+<%= x.lname %>
+</a>
+</br>
+<% end %>
+<% end %>
+
+
+
+<h1>Directors :</h1>
+<% 
+fn1 = params[:tags].split(' ')[0]
+fn2 = params[:tags].split(' ')[1]
+if(fn2.nil?)
+  check1 = Director.where("fname like?", "%#{fn1}%")
+if(check1.size==0)
+   check1 = Director.where("lname like ?", "%#{fn1}%" )  
+    end
+else
+	check1 = Director.where("fname like? or lname like ?", "%#{fn1}%", "%#{fn2}%")
+end
+
+if(check1.size == 0)
+%>
+<p>No Results in Director Database</p>
+<% 
+else 
+check1.each do |x|
+%>
+<a href = "/view/viewdir?id=<%= x.id %>" >
+<%= x.fname %>
+<%= x.lname %>
+</a>
+</br>
+
+<% end %>
+<% end %>
+<% end %>
+<% end %>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% else %>
+
+<div id="nav">
+<li class="Button"><t><%= link_to 'Log Out' ,controller: 'login', action: 'logout',id: session[:id]%></t></li>
+
+<% checkadm = Admin.where(:email => session[:email])
+if(checkadm.size > 0)
+	check22 = Admin.where(:id=>session[:id])
+%>
+	<%= check22[0].fname %>
+	<%= check22[0].lname %>
+
+<% else %>
+<% check = User.where(:id=>session[:id]) %>
+
+<li class="Button"><a><%= link_to 'Home' ,controller: 'welcome', action: 'index'%></a></li>
+<li class="Button"><%= link_to 'Back', :back %></li>
+  <li class="Button"><%= link_to 'Movie List' ,controller: 'view', action: 'viewall'%></li>
+<li class="Button"><a><%= form_tag 'srch', method: :post do %>
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <%= text_field_tag :tags  %>
+
+<%= submit_tag("Search") %>  <% end %>
+</a></li>
+
+<%= form_tag '/usermov', method: :get do %>
+<li class="Button"><%= submit_tag("Add Movie") %></li>  
+<t1><img src="<%= "/"+ check[0].image %>" style = "width:70px;height:70px;border-radius:50px;border-style:2px solid #000000;" ></img>
+<li><%= check[0].fname %>
+<%= check[0].lname %><% end %><% end %></li></t1>
+
+</ul>
+</div>
+
+<div id="search">
+
+<h2>
+~~~~~~~Search Results~~~~~~~~~
+</h2>
+<% if(params[:tags].nil?) %>
+<% else %>
+<% 
+if(params[:tags].size == 0)
+%>
+<h2>Enter a valid string</h2>
+<% else %>
+<h1>Movies :</h1>
+<% 
+puts(params[:tags])
+check = Movie.where("mn like?", "%#{params[:tags]}%" ) 
+
+if(check.size == 0)
+%>
+<p>No Results in Movie Database</p>
+<% 
+else 
+check.each do |x|
+%>
+
+<a href ="/view/viewmov?id=<%= x.id %>" > <img src="<%= "/"+ x.photo %>" style = "width:50px;height:50px;border:1px solid black;" ></img>
+<%= x.mn %><br/>
+</a>
+
+<% end %>
+<% end %>
+
+
+
+<h1>Actors :</h1>
+<% 
+fn1 = params[:tags].split(' ')[0]
+fn2 = params[:tags].split(' ')[1]
+if(fn2.nil?)
+  check1 = Cast.where("fname like?", "%#{fn1}%")
+if(check1.size==0)
+   check1 = Cast.where("lname like ?", "%#{fn1}%" )  
+    end
+else
+	check1 = Cast.where("fname like? or lname like ?", "%#{fn1}%", "%#{fn2}%")
+end
+
+if(check1.size == 0)
+%>
+<p>No Results in Actor Database</p>
+<% 
+else 
+check1.each do |x|
+%>
+<a href = "/view/viewact?id=<%= x.id %>" >
+<%= x.fname %>
+<%= x.lname %>
+</a>
+</br>
+<% end %>
+<% end %>
+
+
+
+<h1>Directors :</h1>
+<% 
+fn1 = params[:tags].split(' ')[0]
+fn2 = params[:tags].split(' ')[1]
+if(fn2.nil?)
+  check1 = Director.where("fname like?", "%#{fn1}%")
+if(check1.size==0)
+   check1 = Director.where("lname like ?", "%#{fn1}%" )  
+    end
+else
+	check1 = Director.where("fname like? or lname like ?", "%#{fn1}%", "%#{fn2}%")
+end
+
+if(check1.size == 0)
+%>
+<p>No Results in Director Database</p>
+<% 
+else 
+check1.each do |x|
+%>
+<a href = "/view/viewdir?id=<%= x.id %>" >
+<%= x.fname %>
+<%= x.lname %>
+</a>
+</br>
+<% end %>
+<% end %>
+<% end %>
+<% end %>
+<% end %>
+
+</div>
+
+</div>
+</body>
+

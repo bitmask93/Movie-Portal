@@ -1,0 +1,29 @@
+
+
+</li>
+<p><%= link_to 'Log Out' ,controller: 'login', action: 'logout',id: session[:id]%></p>
+<li><a><%= link_to 'Back', :back %></a></li>
+<%= form_tag '/editdirector?id='+@x.id.to_s, method: :post , :multipart=>true do %>
+<br>
+<p>Add Director
+<% 
+a1 = session[:id] 
+check = Admin.where(:id=>a1)
+puts(check[0].fname)
+%>
+<%= check[0].fname %>
+<%= check[0].lname %> 
+</p>
+  <p>
+    <%= label_tag :Director_First_Name %>
+    <%= text_field_tag :fname, @x.fname %></br></br>
+    <%= label_tag :Director_Last_Name %>
+    <%= text_field_tag :lname, @x.lname %></br></br>
+    <%= label_tag :Date_Of_Birth %>
+    <%= text_field_tag :dob %></br></br>
+    <%= label_tag :Director_Details %>
+    <%= text_area_tag :notes %></br></br>
+     Add Photo <%= file_field_tag :picture %>
+ </p>
+<%= submit_tag("Add Director") %>
+<% end %>

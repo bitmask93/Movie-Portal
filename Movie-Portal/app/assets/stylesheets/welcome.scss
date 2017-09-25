@@ -1,36 +1,404 @@
-// Place all the styles related to the Welcome controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
 body
 {
-background-image:url("home.jpg");
-background-size:cover;
-background-position:center;
+background-image:url("h1.jpg");
+//background-color:;
+background-size:initial;
+
+//background-position:center;
 
 }
-.myButton {
-	-moz-box-shadow: 3px 4px 0px 0px #8a2a21;
-	-webkit-box-shadow: 3px 4px 0px 0px #8a2a21;
-	box-shadow: 3px 4px 0px 0px #8a2a21;
+.Button {
+	-moz-box-shadow: 3px 4px 0px 0px #22899b;
+	-webkit-box-shadow: 3px 4px 0px 0px #22899b;
+	box-shadow: 3px 4px 0px 0px #22899b;
 	background-color:transparent;
 	-moz-border-radius:18px;
 	-webkit-border-radius:18px;
-	border-radius:18px;
-	border:1px solid #d02718;
+	border-radius:5px;
+	border:1px solid #c4b4b4;
 	display:inline-block;
 	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:17px;
-	padding:7px 25px;
+	color:black;
+	font-family:Serif;
+	font-size:14px;
+	padding:4px 12px;
 	text-decoration:none;
+	
 	text-shadow:0px 1px 0px #810e05;
+	position:relative;
+	right:0px;
+	top:0px;
 }
-.myButton:hover {
+.Button:hover {
 	background-color:transparent;
 }
-.myButton:active {
+.Button:active {
 	position:relative;
-	top:1px;
+	top:0px;
 }
 
+
+
+.wrap
+{
+position:relative;
+//width:980px;
+height:auto;
+//margin:0 12% 0 12%;
+//background-color:#00045e;
+}
+.wrap1
+{
+//position:relative;
+//width:980px;
+height:auto;
+margin:0 10px 0 10px;
+background-color:#146362;
+//background-image:url('home.jpg');
+//background-size:cover;
+}
+.wrap1
+{
+//position:relative;
+//width:980px;
+height:auto;
+margin:0 10px 0 10px;
+background-color:#146362;
+//background-image:url('home.jpg');
+//background-size:cover;
+}
+#logo
+{
+width:100%;
+background:url("images/6.png") no-repeat top left;
+height:100px;
+}
+#nav
+{
+height:60px;
+//width:980px;
+background-color:#009b2222;
+font-family:"Times new roman";
+font-weight:bold;
+position:relative;
+margin-top:0px;
+//width:100%;
+left:0px;
+//border-radius:2px;
+text-align:center;
+color:#ffffff
+}
+#nav ul
+{
+list-style-type:none;
+
+}
+#nav ul t1
+{
+list-style-type:none;
+text-decoration:underline;
+float:left;
+margin-left:10px;
+postion:relative;
+}
+
+
+#nav ul li
+{
+margin-top:10px;
+float:right;
+text-align:center;
+width:auto;
+margin-right:25px;
+//border-left:1px solid blue;
+//border-right:1px solid blue;
+}
+#nav ul li a
+{
+text-decoration:none;
+font: bold 15px Helvetica, Arial, sans-serif;
+ display:box;
+ 
+color:#ffffff;
+
+
+}
+#nav ul li t
+{
+text-decoration:overline;
+font: bold 20px Helvetica, Arial, sans-serif;
+ display:box;
+color:#55595e;
+
+
+}
+#nav ul li a:hover
+{
+font: bold 20px Helvetica, Arial, sans-serif;
+
+}
+#nav li ul
+{
+display:none;
+}
+#nav li:hover ul
+{
+//text align:left;
+display:block;
+position:absolute;
+background-color:white;
+width:200px;
+height:100%;
+//border-radius:10px;
+opacity:.9;
+z-index:1;
+}
+#nav li:hover ul li ul
+{
+display:block;
+position:absolute;
+background-color:white;
+//width:120px;
+//height:100%;
+//border-radius:10px;
+opacity:.9;
+z-index:1;
+}
+#nav li ul li ul
+{
+display:none;
+}
+
+#nav li ul a
+{
+text-align:left;
+}
+
+#contentleft
+{
+
+float:left;
+height:100%;
+width:auto;
+background-color:#00ffffff;
+color:#a6a5a;
+margin:10px 8px 10px 8px;
+border:1px solid black;
+border-radius:2px;
+position:relative;
+padding:25px;
+
+}
+#contentleft:hover
+{
+
+float:left;
+height:250px;
+//width:236px;
+//background-color:#00ffffff;
+//color:#a6a5a;
+//margin:10px 8px 10px 8px;
+//border:1px solid black;
+//border-radius:2px;
+position:relative;
+padding:35px;
+}
+#contentleft a
+{
+color:#000000;
+}
+
+#contentright
+{
+float:left;
+height:680px;
+width:730px;
+margin:10px 8px 10px 8px;
+background-color:white;
+border:1px solid black;
+border-radius: 5px;
+//margin-right:0px;
+}
+#content1
+{
+height:auto;
+//width:980px;
+background-color:#00000f33;
+margin-top:0px;
+border:1px solid #c4b4b4;
+border-radius:2px;
+padding:10px;
+}
+#footer
+{
+float:left;
+position:relative;
+width:920px;
+height:130px;
+//margin:0 15% 0 12%;
+background-color:white;
+border-radius:10px solid black;
+border:10px solid #000f33;
+margin-top:10px;
+}
+#left1
+{
+height:30px;
+width:95%;
+background-color:#00eeff;
+text-align:center;
+//box-shadow:10px 10px 10px #fff;
+border-radius:5px;
+border:2px solid black;
+padding:5px;
+margin-top:10px;
+}
+#content1 h1 {
+	color: #ffffff;
+	font: bold 25px Helvetica, Arial, sans-serif;
+	letter-spacing: -0.05em;
+	line-height: 20px;
+	//margin: 10px 0 30px;
+}
+ 
+#content1 h3 {
+	color: #ffffff;
+	font: bold 16px Helvetica, Arial, sans-serif;
+	text-decoration:underline;
+	letter-spacing: -0.05em;
+	//line-height: 20px;
+	//margin: 10px 0 30px;
+}
+#content1 p {
+	color: #440032;
+	font: italic 14px Helvetica, Arial, sans-serif;
+	letter-spacing: -0.05em;
+	//line-height: 20px;
+	//margin: 10px 0 30px;
+}
+
+#content4
+{
+height:auto;
+//width:980px;
+background-color:#00000f33;
+margin-top:0px;
+border:1px solid #c4b4b4;
+border-radius:2px;
+padding:40px 400px 40px 400px;
+text-align:centre;
+}
+
+#content4 h1 {
+	color: #ffffff;
+	font: bold 20px Helvetica, Arial, sans-serif;
+	text-decoration:underline;
+	letter-spacing: -0.05em;
+	//line-height: 20px;
+	//margin: 10px 0 30px;
+}
+#content4 h6 {
+	color: #ffffff;
+	font: bold 16px Helvetica, Arial, sans-serif;
+	text-decoration:none;
+	letter-spacing: -0.05em;
+	//line-height: 20px;
+	//margin: 10px 0 30px;
+}
+
+#wrap n{
+	color:#443f17;
+	font: italic 16px Helvetica, Arial, sans-serif;
+	float:right;
+	text-decoration:underline;
+	postion:relative;
+        
+}
+t1
+{
+color:#000000;
+}
+
+#comment
+{
+height:auto;
+//width:980px;
+background-color:#c7cbcc;
+margin-top:0px;
+border:1px solid #c4b4b4;
+border-radius:2px;
+padding:20px 40px 20px 40px;
+text-align:centre;
+}
+ pa
+{
+padding:10px;
+}
+
+#search
+{
+height:auto;
+//width:980px;
+background-color:#00000f33;
+margin-top:10px;
+border:1px solid #c4b4b4;
+border-radius:2px;
+padding:10px 50px 20px 50px;
+}
+
+#search h1
+{
+font: bold 18px Helvetica, Arial, sans-serif ;
+color:#c3cbd8;
+
+}
+
+#search h2
+{
+font: bold 25px Helvetica, Arial, sans-serif ;
+text-decoration:underline;
+color:#ffffff;
+
+}
+
+#search1
+{
+
+-moz-box-shadow: 3px 4px 0px 0px #22899b;
+	-webkit-box-shadow: 3px 4px 0px 0px #22899b;
+	box-shadow: 3px 4px 0px 0px #22899b;
+	background-color:transparent;
+height:auto;
+//width:980px;
+background-color:#00000f33;
+margin-top:0px;
+border:1px solid #c4b4b4;
+border-radius:2px;
+padding:10px 50px 20px 50px;
+}
+
+#search1 h1
+{
+font: bold 25px Helvetica, Arial, sans-serif ;
+color:#ffffff;
+text-decoration:underline;
+}
+
+#search1 h2
+{
+font: bold 25px Helvetica, Arial, sans-serif ;
+text-decoration:underline;
+color:#ffffff;
+
+}
+
+#gsearch
+{
+height:auto;
+//width:980px;
+background-color:#00000f33;
+margin-top:10px;
+border:1px solid #c4b4b4;
+border-radius:2px;
+padding:10px 150px 20px 150px;
+}

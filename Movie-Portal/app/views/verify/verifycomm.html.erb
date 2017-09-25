@@ -1,0 +1,16 @@
+<li><a><%= link_to 'Home' ,controller: 'login', action: 'admin'%></a></li>
+<% check = Comment.where(['reports>=?',1])
+check.each do |x| %>
+   <%= x.comment %>
+   <% check1 = User.where(:id=>x.uid) 
+      check1.each do |y|	
+%>
+Commented by :
+<%= y.fname %>
+<%= y.lname %>
+<% end %>
+
+<%= link_to 'Ignore' ,controller:'verify',action:'ignore' ,id:x.id %>
+<%= link_to 'Delete' ,controller:'verify',action:'commdel' ,id:x.id %> 
+
+<% end %>

@@ -1,0 +1,71 @@
+<html>
+<title>MOVIE PORTAL</title>
+<head>
+<!----vendor css---->
+<!--vendor javascript-->
+
+</head>
+
+</head>
+<body>
+
+<!--<div id="logo"></div>-->
+
+   <div id="nav">
+<ul>
+
+<li></li>
+
+<li></li>
+<% if(session[:id].nil?) %>
+<li><a href="login" class="Button">login</a></li>
+
+<li class="Button"> <%= link_to 'Home' ,controller: 'welcome', action: 'index'%></li> 
+<li class="Button"><a><%= form_tag 'srch', method: :post do %>
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <%= text_field_tag :tags  %>
+
+<%= submit_tag("Search") %>  <% end %>
+</a></li>    
+<% else %>
+<li class="Button"><t><%= link_to 'Log Out' ,controller: 'login', action: 'logout',id: session[:id]%></t></li>
+<% check = User.where(:id=>session[:id]) %>
+
+  <li class="Button"><%= link_to 'Home' ,controller: 'welcome', action: 'index'%></li>
+<li class="Button"><a><%= form_tag 'srch', method: :post do %>
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <%= text_field_tag :tags  %>
+
+<%= submit_tag("Search") %>  <% end %>
+</a></li>
+<%= form_tag '/usermov', method: :get do %>
+<li class="Button"><%= submit_tag("Add Movie") %></li>  
+<t1><img src="<%= "/"+ check[0].image %>" style = "width:70px;height:70px;border-radius:50px;border-style:2px solid #000000;" ></img>
+<li><%= check[0].fname %>
+<%= check[0].lname %><% end %><% end %></li></t1>
+
+</ul>
+</div>
+
+<div class="wrap1">
+ 
+<% check = Movie.where(:verify=>1).order(mn: :asc)
+check.each do |x|
+%>
+
+ <!-loaded image from database here->
+
+<div id="contentleft"><a href ="/view/viewmov?id=<%= x.id %>" > <img src="<%= "/"+ x.photo %>" style = "width:228px;height:228px;" ></img></a><br/><a href ="/view/viewmov?id=<%= x.id %>" > <%= x.mn %></a>
+</div> 
+
+<%
+end
+%>
+</div>
+
+
+</body>
+
+
+</html>
+

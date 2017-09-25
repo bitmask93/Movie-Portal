@@ -1,45 +1,87 @@
+<html>  
+<body>
+<div class="Button"><t1><%= link_to 'Home' ,controller: 'welcome', action: 'index'%></t1></div>
+
+
+
+	<section id="content">
+
 <li>
 
  <% @em.each do |x| %>
 <ul><%= x %></ul>
 <% end %>
 
+
+
+
+
 </li>
 <%= form_tag '/login', method: :posts do %>
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
   <p>
   <%= radio_button_tag :contactmethod, 'admin', :checked => true %> 
   <%= label :contactmethod_admin, 'Admin' %>
   <%= radio_button_tag :contactmethod, 'others' %>
   <%= label :contactmethod_others, 'Others'%>
-	</br>
-    <%= label_tag :Email %>
-    <%= email_field_tag :eml %>
-    <%= label_tag :Password %>
-    <%= password_field_tag :pwd %>
-    <%= submit_tag("Login") %>  
+	</br><br/>
+
+ <!--  <%= label_tag :Email %>
+    <%= email_field_tag :eml %>-->
+<lable for "eml"></lable>
+<input id="eml" name= "eml" input type="text" class="form-control" placeholder="Username"><br/>
+    <!--<%= label_tag :Password %>
+    <%= password_field_tag :pwd %>-->
+<!--<lable for "pwd"></lable>-->
+<input id="pwd" name= "pwd" input type="password" class="form-control" placeholder="Password"><br/>
+
+   <div><%= submit_tag("Login") %></div>
  </p>
 <% end %>
 
-<%= form_tag '/create', method: :post do %>
+<%= form_tag '/create', method: :post, :multipart=>true  do %>
 <br>
-<p>New User?</p>
-  <p>
-    <%= label_tag :First_Name %>
+<h1>New User?</h1>
+  
+    <!--<%= label_tag :First_Name %>
     <%= text_field_tag :fn %>
     <%= label_tag :Last_Name %>
-    <%= text_field_tag :ln %>
- </p>
-<p>
-    <%= label_tag :Email %>
-    <%= email_field_tag :em %>
-</p>
-<p>
-    <%= label_tag :Password %>
-    <%= password_field_tag :pw %> 
-</p>
-<p>
-    <%= label_tag :Password %>
-    <%= password_field_tag :cpw %> 
-</p>
+    <%= text_field_tag :ln %>--->
+<lable for "fn"></lable>
+<input id="fn" name= "fn" input type="text" class="form-control" placeholder="First Name">
+<lable for "ln"></lable>
+<input id="ln" name= "ln" input type="text" class="form-control" placeholder="Last Name">
+
+    <!--<%= label_tag :Email %>
+    <%= email_field_tag :em %>--->
+<lable for "em"></lable>
+<input id="eml" name= "em" input type="text" class="form-control" placeholder="Email Id">
+ 
+
+   <!-- <%= label_tag :Password %>
+    <%= password_field_tag :pw %> --->
+<lable for "pw"></lable>
+<input id="pw" name= "pw" input type="password" class="form-control" placeholder="Password">
+
+
+   <!-- <%= label_tag :Password %>
+    <%= password_field_tag :cpw %> -->
+<lable for "cpw"></lable>
+<input id="cpw" name= "cpw" input type="password" class="form-control" placeholder="Confirm Password">
+
+<!-- profile pic adding -->
+  <t1>Add Photo :</t1>
+   <div class="Button"> <%= file_field_tag :picture %></div>
+
+
 <%= submit_tag("Register")%>
 <% end %>
+
+</section><!-- content -->
+</div><!-- container -->
+
+  
+   
+
+</body>
+</html>

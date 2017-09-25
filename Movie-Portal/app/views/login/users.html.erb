@@ -1,3 +1,74 @@
-<h1>
-	hello users
-</h1>
+<%= form_tag 'srch', method: :post do %>
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <%= text_field_tag :tags %></br></br>
+
+<%= submit_tag("Search") %>  
+<% end %>
+
+<%= form_tag '/usermov', method: :get do %>
+<p><%= link_to 'Log Out' ,controller: 'login', action: 'logout',id: session[:id]%></p>
+<p> Welcome
+<% 
+a1 = session[:id] %>
+<% if(a1.nil?) %>
+    <meta http-equiv="refresh" content="2;url=http://localhost:3000" />
+<% else %>
+<% check = User.where(:id=>a1) %>
+<%= check[0].fname %>
+<%= check[0].lname %>
+</br>
+    <%= submit_tag("Add Movie") %>  
+ </p>
+<% end %>
+<table>
+</br>
+<th>In Theatres</th>
+<%
+check = Movie.where(:verify=>1).where('dor BETWEEN ? AND ?', Date.today - 20 , Date.today ).order(dor: :desc) 
+check.each do |x|
+%>
+<tr>
+ <!-loaded image from database here->
+<td>
+<a href ="/view/viewmov?id=<%= x.id %>" > <img src="<%= "/"+ x.photo %>" style = "width:228px;height:228px;" ></img></a> 
+</td> 	 		
+
+</tr>
+<tr>
+<td><%= x.mn %></td>
+</tr>
+<%
+end
+%>
+<tr></tr>
+
+
+</table>
+
+
+
+<table>
+</br>
+<th>Coming Soon</th>
+<%
+check = Movie.where(:verify=>1).where('dor BETWEEN ? AND ?', Date.today , Date.today + 20).order(dor: :asc) 
+check.each do |x|
+%>
+<tr>
+ <!-loaded image from database here->
+<td>
+<a href ="/view/viewmov?id=<%= x.id %>" > <img src="<%= "/"+ x.photo %>" style = "width:228px;height:228px;" ></img></a> 
+</td> 	 		
+
+</tr>
+<tr>
+<td><%= x.mn %></td>
+</tr>
+<%
+end
+%>
+<tr></tr>
+
+
+</table>
+<% end %>

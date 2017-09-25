@@ -1,0 +1,69 @@
+// Place all the styles related to the view controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+#vdo
+{
+height:auto;
+//width:980px;
+background-color:#00000f33;
+margin-top:0px;
+border:1px solid #c4b4b4;
+border-radius:2px;
+padding:10px;
+-moz-box-shadow: 3px 4px 0px 0px #22899b;
+	-webkit-box-shadow: 3px 4px 0px 0px #22899b;
+	box-shadow: 3px 4px 0px 0px #22899b;
+
+}
+#poster
+{
+-moz-box-shadow: 3px 4px 0px 0px #22899b;
+	-webkit-box-shadow: 3px 4px 0px 0px #22899b;
+	box-shadow: 3px 4px 0px 0px #22899b;
+position:absolute;
+margin-top:130px;
+padding:10px;
+border:1px solid #c4b4b4;
+left:100px;
+border-radius:3px;
+}
+#details
+{
+height:auto;
+//width:980px;
+background-color:#0000f33;
+margin-top:10px;
+border:1px solid #c4b4b4;
+border-radius:2px;
+padding:50px 100px 50px 100px;
+-moz-box-shadow: 3px 4px 0px 0px #22899b;
+	-webkit-box-shadow: 3px 4px 0px 0px #22899b;
+	box-shadow: 3px 4px 0px 0px #22899b;
+
+
+}
+#details p
+{
+color:342f448;
+}
+
+#poster1
+{
+-moz-box-shadow: 3px 4px 0px 0px #22899b;
+	-webkit-box-shadow: 3px 4px 0px 0px #22899b;
+	box-shadow: 3px 4px 0px 0px #22899b;
+position:relative;
+margin-top:30px;
+padding:10px;
+border:1px solid #c4b4b4;
+
+border-radius:3px;
+}
+.boxxx
+{
+height:auto;
+width:80px;
+border:1px solid #000000;
+position:relative;
+}
+

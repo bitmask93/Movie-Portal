@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  mn: MyString
+  dor: 2017-09-16
+  video: MyString
+  dur: 1
+  gen1: MyString
+  gen2: MyString
+  note: MyString
+  photo: MyString
+  verify: 1
+
+two:
+  mn: MyString
+  dor: 2017-09-16
+  video: MyString
+  dur: 1
+  gen1: MyString
+  gen2: MyString
+  note: MyString
+  photo: MyString
+  verify: 1

@@ -1,59 +1,110 @@
-<li>
+<script   src="https://code.jquery.com/jquery-2.2.3.min.js"   integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/css/bootstrap-datepicker3.min.css">
+<script>
+$( document ).ready(function() {
+    $("#from-datepicker").datepicker({ 
+        format: 'yyyy/mm/dd'
+    });
+    $("#from-datepicker").on("change", function () {
+        var fromdate = $(this).val();
+        alert(fromdate);
+    });
+}); 
+</script>
+<html>
+<div class="wrap">
+<div id="nav">
+<ul>
+
+<li></li>
+
+
+<li class="Button"><%= link_to 'Log Out' ,controller: 'login', action: 'logout',id: session[:id]%></li>
+
+
+<li class="Button"><a><%= link_to 'Back', :back %></a></li>
+<li class="Button"><t1><%= form_tag 'srch', method: :post do %>
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <%= text_field_tag :tags  %>
+
+<%= submit_tag("Search") %>  <% end %>
+</t1></li>
+
+
+
+<% a1 = session[:id] %>
+<% if(session[:id].nil?) %>
+<meta http-equiv="refresh" content="2;url=http://localhost:3000" />
+<% else %>
+<% check = Admin.where(:email => session[:email])
+if(check.size > 0)
+check2 = Admin.where(:id=>a1)
+%>
+	<t1>Welcome !<%= check2[0].fname %>
+	<%= check2[0].lname %></t1>
+<% else %>
+<% check1 = User.where(:id=>a1)
+%>
+<t1><img src="<%= "/"+ check1[0].image %>" style = "width:70px;height:70px;border-radius:50px;border-style:2px solid #000000;" ></img>
+	<%= check1[0].fname %>
+	<%= check1[0].lname %></t1>
+
+<li class="Button"><a><%= link_to 'Home' ,controller: 'welcome', action: 'index'%></a></li>
+
+<% end %> 
+
+<li><t>Add Movie</t></li>
+</ul>
+</div>
 
  <% @em.each do |x| %>
-<ul><%= x %></ul>
+<n><%= x %></n>
 <% end %>
+<div id="content4">
 
-</li>
 
-<%= form_tag '/_addmov', method: :post do %>
+<%= form_tag '/_addmov', method: :post, :multipart=>true do %>
 <br>
-<p>Welcome
-<% 
-a1 = session[:id] 
-check = Admin.where(:id=>a1)
-puts(check[0].fname)
-%>
-<%= check[0].fname %>
-<%= check[0].lname %> 
-</p>
-  <p>
-    <%= label_tag :Movie_Name %>
-    <%= text_field_tag :mn %></br></br>
-    <%= label_tag :Casts %>
-    <%= text_field_tag :act %>
- </p>
 <p>
-    <%= label_tag :Date_Of_Release %>
-    <%= date_field_tag :dor %>
+
 </p>
-<p>
-    <%= label_tag :Trailer_Link %>
-    <%= text_field_tag :video %> 
-</p>
-<p>
-    <%= label_tag :Runtime %>
-    <%= text_field_tag :duration %> 
-</p>
-<p>
-    <%= label_tag :Genre_1 %>
-    <%= text_field_tag :gen1 %> 
-</p>
-<p>
-    <%= label_tag :Genre_2 %>
-    <%= text_field_tag :gen2 %> 
-</p>
-<p>
-    <%= label_tag :Trailer_Link %>
-    <%= text_field_tag :video %> 
-</p>
-<p>
-    <%= label_tag :Synopsis %>
-    <%= text_area_tag :description %> 
-</p>
-<p>
-    Add Photo
-    <%= file_field_tag :picture %>
-</p>
-<%= submit_tag("Register")%>
+ 
+    <h6><%= label_tag :Movie_Name %></h6>
+    <div class="Button"><%= text_field_tag :mn %></div>
+    <h6><%= label_tag :Casts %></h6>
+    <div class="Button"><%= text_field_tag :act %></div>
+ 
+    <h6><%= label_tag :Date_Of_Release %></h6>
+<div class="Button"><input  name= "dor" input type="text" class="required input_field" id="from-datepicker" placeholder="yyyy/mm/dd"/></div>
+    
+
+    <h6><%= label_tag :Trailer_Link %></h6>
+   <div class="Button"><%= text_field_tag :video %></div>
+
+    <h6><%= label_tag :Runtime %></h6>
+    <div class="Button"><%= text_field_tag :duration %> </div>
+
+    <h6><%= label_tag :Genre_1 %></h6>
+   <div class="Button"> <%= select_tag :gen1 ,options_for_select([['',''] ,['Action','action'], ['Thriller','thriller'], ['Mystery','mystery'], ['Crime','crime'], ['Drama','drama'], ['Romance','romance'], ['War','war'], ['Western','western'], ['Adventure','adventure'], ['Horror','horror'], ['Animation','animation'], ['Documentary','documentary'], ['Musical','musical'], ['Sci-fi','sci-fi'], ['Slasher','slasher'], ['Comedy','comedy'], ['Fantasy','fantasy'], ['Spy','spy'], ['Family','family'], ['History','history']]) %>  </div>  
+
+    <h6><%= label_tag :Genre_2 %></h6>
+  <div class="Button"> <%= select_tag :gen2 ,options_for_select([['',''] ,['Action','action'], ['Thriller','thriller'], ['Mystery','mystery'], ['Crime','crime'], ['Drama','drama'], ['Romance','romance'], ['War','war'], ['Western','western'], ['Adventure','adventure'], ['Horror','horror'], ['Animation','animation'], ['Documentary','documentary'], ['Musical','musical'], ['Sci-fi','sci-fi'], ['Slasher','slasher'], ['Comedy','comedy'], ['Fantasy','fantasy'], ['Spy','spy'], ['Family','family'], ['History','history']]) %></div>
+
+    <h6><%= label_tag :Synopsis %></h6>
+    <div class="Button"><%= text_area_tag :description %> </div>
+
+    <h6><%= label_tag :Director %></h6>
+   <div class="Button"> <%= text_field_tag :director %> </div>
+
+    <h6>Add Photo :</h6>
+   <div class="Button"> <%= file_field_tag :picture %></div>
+
+<div class="Button"><%= submit_tag("Register")%></div>
 <% end %>
+<% end %>
+</div>
+</div>
+</html>

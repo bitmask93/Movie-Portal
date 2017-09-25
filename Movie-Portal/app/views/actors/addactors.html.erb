@@ -1,14 +1,35 @@
-<li>
+<html>
+<title>MOVIE PORTAL</title>
+<head>
+<!----vendor css---->
+<!--vendor javascript-->
 
- <% @em.each do |x| %>
-<ul><%= x %></ul>
-<% end %>
+</head>
 
-</li>
+</head>
+<body>
+<div class="wrap">
+<!--<div id="logo"></div>-->
 
-<%= form_tag '/addactors', method: :post , :multipart=>true do %>
-<br>
-<p>Add Actors
+  <div id="nav">
+<ul>
+
+<li></li>
+
+
+<li class="Button"><%= link_to 'Log Out' ,controller: 'login', action: 'logout',id: session[:id]%></li>
+
+
+<li class="Button"><a><%= link_to 'Home' ,controller: 'login', action: 'admin' %></a></li>
+<li class="Button"><a><%= form_tag 'srch', method: :post do %>
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <%= text_field_tag :tags  %>
+
+<%= submit_tag("Search") %>  <% end %>
+</a></li>
+
+
+<li><t>
 <% 
 a1 = session[:id] 
 check = Admin.where(:id=>a1)
@@ -16,17 +37,42 @@ puts(check[0].fname)
 %>
 <%= check[0].fname %>
 <%= check[0].lname %> 
-</p>
+</t></li>
+<li><t>___________</t></li>
+<li><t>Add Actors</t></li>
+
+</ul>
+</div>
+
+<n><% @em.each do |x| %>
+<%= x %>
+<% end %></n>
+
+<div id="content4">
+
+<%= form_tag '/addactors', method: :post , :multipart=>true do %>
+<br>
+
   <p>
-    <%= label_tag :Actor_First_Name %>
-    <%= text_field_tag :fname %></br></br>
-    <%= label_tag :Actor_Last_Name %>
-    <%= text_field_tag :lname %></br></br>
-    <%= label_tag :Date_Of_Birth %>
-    <%= text_field_tag :dob %></br></br>
-    <%= label_tag :Actor_Details %>
-    <%= text_area_tag :notes %></br></br>
-     Add Photo <%= file_field_tag :picture %>
- </p>
-<%= submit_tag("Add Actor") %>
+    <h1><%= label_tag :Actor_First_Name %> :</h1>
+   <%= text_field_tag :fname %>
+
+   <h1><%= label_tag :Actor_Last_Name %> :</h1>
+    <%= text_field_tag :lname %>
+    <h1><%= label_tag :Date_Of_Birth %> :</h1>
+    <%= text_field_tag :dob %>
+    <h1><%= label_tag :Actor_Details %> :</h1>
+    <%= text_area_tag :notes %>
+     <h1>Add Photo :</h1> <div class="Button"><%= file_field_tag :picture %></div>
+ </p >
+<div class="Button"><%= submit_tag("Add Actor") %></div>
 <% end %>
+</div>
+</body>
+
+
+</html>
+
+
+
+

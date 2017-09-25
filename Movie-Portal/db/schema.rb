@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170914160217) do
+ActiveRecord::Schema.define(version: 20170924184654) do
+
+  create_table "acteds", force: :cascade do |t|
+    t.integer "mid"
+    t.integer "cid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "admins", force: :cascade do |t|
     t.string "fname"
@@ -31,6 +38,73 @@ ActiveRecord::Schema.define(version: 20170914160217) do
     t.string "note"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.integer "uid"
+    t.integer "mid"
+    t.string "comment"
+    t.integer "reports", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "directors", force: :cascade do |t|
+    t.string "fname"
+    t.string "lname"
+    t.string "image"
+    t.date "dob"
+    t.string "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "directs", force: :cascade do |t|
+    t.integer "mid"
+    t.integer "did"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "movies", force: :cascade do |t|
+    t.string "mn"
+    t.date "dor"
+    t.string "video"
+    t.integer "dur"
+    t.string "gen1"
+    t.string "gen2"
+    t.string "note"
+    t.string "photo"
+    t.integer "verify", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "rates", force: :cascade do |t|
+    t.integer "mid"
+    t.integer "uid"
+    t.integer "rating"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "reports", force: :cascade do |t|
+    t.integer "uid"
+    t.integer "mid"
+    t.integer "cid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "fname"
+    t.string "lname"
+    t.string "email"
+    t.string "pass"
+    t.integer "salt"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "image"
   end
 
 end

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<title>MOVIE PORTAL</title>
+<head>
+<!----vendor css---->
+<!--vendor javascript-->
+
+</head>
+
+</head>
+<body>
+<div class="wrap">
+<!--<div id="logo"></div>-->
+
+  <div id="nav">
+<ul>
+
+<% if(session[:id].nil?) %>
+<li><a href="login" class="Button">login</a></li>
+<li class="Button"><a><%= link_to 'Home' ,controller: 'welcome', action: 'index'%></a></li>
+<li class="Button"> <%= link_to 'Movie List' ,controller: 'view', action: 'viewall'%></li> 
+<li class="Button"><a><%= form_tag 'srch', method: :post do %>
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <%= text_field_tag :tags  %>
+
+<%= submit_tag("Search") %>  <% end %>
+</a></li>    
+<% else %>
+<li class="Button"><t><%= link_to 'Log Out' ,controller: 'login', action: 'logout',id: session[:id]%></t></li>
+<% check = User.where(:id=>session[:id]) %>
+<li class="Button"><a><%= link_to 'Home' ,controller: 'welcome', action: 'index'%></a></li>
+  <li class="Button"><%= link_to 'Movie List' ,controller: 'view', action: 'viewall'%></li>
+<li class="Button"><a><%= form_tag 'srch', method: :post do %>
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <%= text_field_tag :tags  %>
+
+<%= submit_tag("Search") %>  <% end %>
+</a></li>
+
+<%= form_tag '/usermov', method: :get do %>
+<li class="Button"><%= submit_tag("Add Movie") %></li>  
+<t1><img src="<%= "/"+ check[0].image %>" style = "width:70px;height:70px;border-radius:50px;border-style:2px solid #000000;" ></img>
+<li><%= check[0].fname %>
+<%= check[0].lname %><% end %><% end %></li></t1>
+
+</ul>
+</div>
+<div id="search">
+
+<%
+check = Cast.where(:id=>params[:id]) 
+%>
+<li><a><%= link_to 'Back', :back %></a></li>
+<div id="poster1"><img src="<%= "/"+ check[0].image %>" style = "width:228px;height:228px;" ></img>
+</br>
+<%= check[0].fname %>
+<%= check[0].lname %>
+</div>
+</br>
+Date Of Birth : <%= check[0].dob %>
+</br>
+About : <%= check[0].note %>
+</br>
+Movies Acted
+
+<%
+i=0
+check3 = Acted.where(:cid=>params[:id])
+check3.each do 
+b = check3[i].mid
+     check4 = Movie.where(:id=>b)
+i=i+1
+%>
+<a href = "/view/viewmov?id=<%= check4[0].id %>" >
+	<%= check4[0].mn %>,
+	 </a>
+<% end %>
+
+
+</div>
+</div>
+</div>
+</body>
+

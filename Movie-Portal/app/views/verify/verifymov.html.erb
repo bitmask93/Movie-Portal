@@ -1,0 +1,83 @@
+<html>
+<!--<%= form_tag '/select', method: :posts do %> -->
+<p></p>
+
+<!---
+  <p>
+<td><%= link_to 'Add Movie' ,controller: 'addmov', action: '_addmov',id: session[:id]%> </td>
+<td><%= link_to 'Add Actors' ,controller: 'actors', action: 'addactors',id: session[:id]%> </td>
+<td><%= link_to 'Add Director' ,controller: 'directors', action: 'adddir',id: session[:id]%> </td>
+<td><%= link_to 'Verify Movie' ,controller: 'verify', action: 'verifymov',id: session[:id]%> </td>-->
+<div id="nav">
+<ul>
+<li class="Button"><a><%= link_to 'Log Out' ,controller: 'login', action: 'logout',id: session[:id]%></a></li>
+<li class="Button"><%= link_to 'Add Movie' ,controller: 'addmov', action: '_addmov',id: session[:id]%></li>
+<li class="Button"><%= link_to 'Add Actors' ,controller: 'actors', action: 'addactors',id: session[:id]%> </li>
+
+
+<li class="Button"><%= link_to 'Add Director' ,controller: 'directors', action: 'adddir',id: session[:id]%></li>
+
+
+
+<li class="Button"><%= link_to 'Verify Movie' ,controller: 'verify', action: 'verifymov',id: session[:id]%></li>
+<li class="Button"><%= link_to 'Home' ,controller: 'login', action: 'admin'%></li>
+<li class="Button"><%= form_tag 'srch', method: :post do %>
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <%= text_field_tag :tags  %>
+
+<%= submit_tag("Search") %>  
+<% end %></li>
+
+
+</ul>
+</div>
+  <!--<%= radio_button_tag :contactmethod, 'add_mov', :checked => true %> 
+  <%= label :contactmethod_add_mov, 'Add Movies' %>
+  <%= radio_button_tag :contactmethod, 'add_act' %>
+  <%= label :contactmethod_verify_mov, 'Add Actors'%>
+  <%= radio_button_tag :contactmethod, 'add_dir' %>
+  <%= label :contactmethod_add_dir, 'Add Director'%>
+  <%= radio_button_tag :contactmethod, 'verify_mov' %>
+  <%= label :contactmethod_verify_mov, 'Verify_movies'%>
+  <%= radio_button_tag :contactmethod, 'review_comments' %>
+  <%= label :contactmethod_review_comments, 'Review Comments'%>
+	</br>
+    <%= submit_tag("OK") %>  -->
+ </p>
+<% end %>
+
+<!---Welcome --->
+<div id="search"><h1>Welcome !
+
+</h1></div>
+<div id="search1">
+
+
+
+ <% @em.each do |x| %>
+<ul><%= x %></ul>
+<% end %>
+
+
+
+
+<table>
+<%
+check = Movie.where(:verify=>0)
+check.each do |x|
+%>
+<div id="poster1"><img src="<%= "/"+ x.photo %>" style = "width:228px;height:228px;" ></img></br>
+<%= x.mn %></div><br/>
+<%= x.dor %></td></tr>
+<td><%= link_to 'CONFIRM' ,controller:'verify',action:'movieadded' ,id:x.id %> </td>
+<td><%= link_to 'DELETE' ,controller:'verify',action:'moviedeleted' ,id:x.id %> </td>
+</tr>
+
+<%
+end
+%>
+<tr></tr>
+
+</table>
+</div>
+</html>

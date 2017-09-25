@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<title>MOVIE PORTAL</title>
+<head>
+<!----vendor css---->
+<!--vendor javascript-->
+
+</head>
+
+</head>
+<body>
+<div class="wrap">
+<!--<div id="logo"></div>-->
+
+  <div id="nav">
+<ul>
+
+<li></li>
+
+<li></li>
+<% if(session[:id].nil?) %>
+<li><a href="login" class="Button">login</a></li>
+
+<li> <%= link_to 'Viewall' ,controller: 'view', action: 'viewall'%></li>     
+<% else %>
+<li class="Button"><t><%= link_to 'Log Out' ,controller: 'login', action: 'logout',id: session[:id]%></t></li>
+<% check = User.where(:id=>session[:id]) %>
+  <li> <%= link_to 'Viewall' ,controller: 'view', action: 'viewall'%></li>
+<li><a><%= form_tag 'srch', method: :post do %>
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <%= text_field_tag :tags  %>
+
+<%= submit_tag("Search") %>  <% end %>
+</a></li>
+<%= form_tag '/usermov', method: :get do %>
+<img src="<%= "/"+ check[0].image %>" style = "width:70px;height:70px;border-radius:50px;border-style:2px solid #000000;" ></img>
+<li><t><%= check[0].fname %>
+<%= check[0].lname %></t></li>
+<li><%= submit_tag("Add Movie") %><% end %><% end %></li>  
+
+
+
+
+
+
+
+
+
+</ul>
+</div>
+
+
+
+<div id="content1">
+
+<body>
+<div class="body">
+
+</div>
+</body>
+<table>
+</br>
+<h1>In Theatres</h1>
+</br>
+<%
+check = Movie.where(:verify=>1).where('dor BETWEEN ? AND ?', Date.today - 20 , Date.today ).order(dor: :desc) 
+check.each do |x|
+%>
+
+ <!-loaded image from database here->
+
+<section id="contentleft"><a href ="/view/viewmov?id=<%= x.id %>" > <img src="<%= "/"+ x.photo %>" style = "width:228px;height:228px;" ></img></a><br/><a href ="/view/viewmov?id=<%= x.id %>" > <%= x.mn %></a>
+</section> 
+
+<%
+end
+%>
+<td></td>
+</table>
+<table>
+
+</br>
+
+<h1>Coming Soon</h1>
+<%
+check = Movie.where(:verify=>1).where('dor BETWEEN ? AND ?', Date.today , Date.today + 20).order(dor: :asc) 
+check.each do |x|
+%>
+<tr>
+ <!-loaded image from database here->
+<td>
+<div id="contentleft"><a href ="/view/viewmov?id=<%= x.id %>" > <img src="<%= "/"+ x.photo %>" style = "width:228px;height:228px;" ></img>
+</a><br/><a href ="/view/viewmov?id=<%= x.id %>" > <%= x.mn %></a></div> 
+</td> 	 		
+
+</tr>
+
+<%
+end
+%>
+<tr></tr>
+
+
+</table>
+</div>
+
+</div>
+</body>
+
+
+</html>
+

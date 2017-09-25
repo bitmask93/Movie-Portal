@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<title>MOVIE PORTAL</title>
+<head>
+<!----vendor css---->
+<!--vendor javascript-->
+
+</head>
+
+</head>
+<body>
+
+<!--<div id="logo"></div>-->
+
+  <div id="nav">
+<ul>
+<li><% if(session[:id].nil?) %>
+<li class="Button"><%= link_to 'Login' ,controller: 'login', action: 'index',id: session[:id]%></a>
+<li class="Button"><%= link_to 'Home' ,controller: 'welcome', action: 'index'%></a>
+<% else %>
+<li class="Button"><%= link_to 'Log Out' ,controller: 'login', action: 'logout',id: session[:id]%></li>
+
+
+<li class="Button"><%= form_tag 'srch', method: :post do %>
+     <%= text_field_tag :tags  %>
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+<%= submit_tag("Search") %>  
+<% end %></li>
+<li class="Button"><%= link_to 'Back', :back %></li>
+<li class="Button"><a><%= link_to 'Home' ,controller: 'welcome', action: 'index'%></li>
+
+
+<% check1 = User.where(:id=>session[:id]) %>
+	<t1>
+<img src="<%= "/"+ check1[0].image %>" style = "width:100px;height:100px;border-radius:75px;border-style:2px solid #000000;" ></img><li><%= check1[0].fname %>
+        <%= check1[0].lname %></t></li>
+	
+
+<% end %>
+
+
+
+
+
+</ul>
+</div>
+<div class="wrap1">
+<div id="content1">
+
+<%
+check = Movie.where(:id=>params[:id]) 
+%>
+<% if(check[0].verify ==1 ) %>
+<!---Poster--->
+<div id="poster"><img src="<%= "/"+ check[0].photo %>" style = "width:228px;height:228px;" ></br><h3><%= check[0].mn %></h3></img></div></br>
+
+<!---Video--->
+<div id="vdo"><%  arr = check[0].video.split('watch?v=') %>
+<iframe src="<%= arr[0]+"embed"+"/"+ arr[1]+"?rel=0&amp;showinfo=0"  %>"
+   width="100%" height="315" frameborder="4" allowfullscreen></iframe>
+</div>
+
+<div id="details">
+</br>
+
+	<%= link_to check[0].gen1 ,controller: 'search', action: 'srchgen',genr: check[0].gen1,id:params[:id] %>
+        <%= link_to check[0].gen2 ,controller: 'search', action: 'srchgen',genr: check[0].gen2,id:params[:id] %>
+
+</br>
+<h3>Date Of Release:
+<%= check[0].dor %></h3>
+<h3>Synopsis :</h3>
+
+<%= check[0].note %>
+<h3>Runtime :</h3>
+<%= check[0].dur %> minutes
+ <h3>Averate Rating : </h3>
+<% 
+avgrat = Rate.where(:mid => params[:id]).average("rating")
+count1 = Rate.where(:mid => params[:id]).count
+%>
+
+<% if(avgrat.nil?)  %>
+- No Ratings for this movie
+<% else %>
+<%= (((avgrat*100).to_i)/100.to_f).to_f %> / 5
+    (Number of ratings:
+     <%= count1 %>)
+</br>
+
+<% end %>
+
+ <% if(not session[:id].nil?) %>
+<% check = Rate.where(:mid=>params[:id]).where(:uid=>session[:id]) %>
+<% if(check.size == 0) %>
+
+
+
+<%= form_tag 'addrating', method: :post, :multipart=>true do %>
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <% id1 = params[:id] 
+      puts(id1)  %>
+    <%= hidden_field_tag 'movid' , id1 %>
+    <h3><%= label_tag :Rate_the_Movie %>:
+    <%= select_tag :r1 ,options_for_select([['',''] ,['1','1'], ['2','2'], ['3','3'], ['4','4'], ['5','5']]) %> 
+
+<%= submit_tag("Rate") %></h3> 
+
+
+<% end %>
+<% else %>
+<h3>You already gave the movie a <%= check[0].rating %> rating</h3>
+<% end %>
+<% end %>
+<%
+check1 = Direct.where(:mid=>params[:id])
+a = check1[0].did
+check2 = Director.where(:id=>a)
+%>
+
+<h3>Director :</h3>
+<img src="<%= "/"+ check2[0].image %>" style = "width:75px;height:75px;border-radius:50px;border-style:2px solid #000000;" ></img>
+<a href = "/view/viewdir?id=<%= check2[0].id %>" style="color:red;">
+	<%= check2[0].fname %>
+	<%= check2[0].lname %>
+</a>
+
+
+
+ 
+<h3>Cast :</h3> <br/>
+<%
+i=0
+check3 = Acted.where(:mid=>params[:id])
+check3.each do 
+b = check3[i].cid
+     check4 = Cast.where(:id=>b)
+i=i+1
+%>
+
+<img class="boxxx" src="<%= "/"+ check4[0].image %>" style = "width:75px;height:75px;border-radius:50px;border-style:2px solid #000000;" ></img>
+<a href = "/view/viewact?id=<%= check4[0].id %>" style="color:red;">
+
+	<%= check4[0].fname %>
+	<%= check4[0].lname %> </a>
+<% end %>
+
+<h3>Comments : </h3>
+
+
+<% if(not session[:id].nil?) %>
+<%= form_tag 'comments', method: :post, :multipart=>true do %>
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+
+ <% id1 = params[:id] 
+      puts(id1)  %>
+    <%= hidden_field_tag 'movid' , id1 %>
+   <h3> 
+<input 
+type="text" name="comment"
+placeholder="Post you comment..." 
+onfocus="this.placeholder = ''"
+onblur="this.placeholder = 'Post you comment...'" />
+ 
+    
+<%= submit_tag("Add Comment") %></h3>
+<% end %>
+<% end %>
+
+<% check = Comment.where(:mid=>params[:id]).order(created_at: :desc) %>
+<% check.each do |x| %>
+<div id="comment">
+ 
+	<% check1 = User.where(:id=>x.uid) %>
+	<img src="<%= "/"+ check1[0].image %>" style = "width:50px;height:50px;border-style:2px solid #000000; padding:3px;" ></img>
+	<%= x.comment %> <br/>
+	<%= check1[0].fname %>
+        <%= check1[0].lname %>:
+        <% if(x.uid.to_s == session[:id].to_s) %>
+ 	     <%= link_to 'DELETE' ,controller:'view',action:'destroycomm' ,cid:x.id,movid:params[:id] %> 
+	<% else %>
+	   <% if(not session[:id].nil?) %>
+		<% check5 = Report.where(:mid=>params[:id]).where(:cid=>x.id).where(:uid=>session[:id]) %>
+                <% if(check5.size==0) %>
+            <%= link_to 'Report_Comment' ,controller:'view',action:'reportcomm' ,cid:x.id,movid:params[:id] %> 
+	<% end %>
+
+	<% end %> 
+        <% end %> 
+      </div>
+         	
+</br>
+<% end %>
+<% else %>
+<p>Movie yet to be verified by admin </p>
+<% end %>
+</div>
+ 
+</div>
+</div>
+
+</body>
+
+
+</html>
+

@@ -1,22 +1,107 @@
-<%= form_tag '/select', method: :posts do %>
-<p>Welcome
-<% 
-a1 = session[:id] 
-check = Admin.where(:id=>a1)
-%>
-<%= check[0].fname %>
-<%= check[0].lname %>
-</p>
+<html>
+<!--<%= form_tag '/select', method: :posts do %> -->
+<p></p>
+
+<!---
   <p>
-  <%= radio_button_tag :contactmethod, 'add_mov', :checked => true %> 
+<td><%= link_to 'Add Movie' ,controller: 'addmov', action: '_addmov',id: session[:id]%> </td>
+<td><%= link_to 'Add Actors' ,controller: 'actors', action: 'addactors',id: session[:id]%> </td>
+<td><%= link_to 'Add Director' ,controller: 'directors', action: 'adddir',id: session[:id]%> </td>
+<td><%= link_to 'Verify Movie' ,controller: 'verify', action: 'verifymov',id: session[:id]%> </td>-->
+<div id="nav">
+<ul>
+<li class="Button"><a><%= link_to 'Log Out' ,controller: 'login', action: 'logout',id: session[:id]%></a></li>
+<li class="Button"><%= link_to 'Add Movie' ,controller: 'addmov', action: '_addmov',id: session[:id]%></li>
+
+<li class="Button"><%= link_to 'Add Actors' ,controller: 'actors', action: 'addactors',id: session[:id]%> </li>
+
+
+<li class="Button"><%= link_to 'Add Director' ,controller: 'directors', action: 'adddir',id: session[:id]%></li>
+
+<li class="Button"><%= link_to 'Verify Comments' ,controller: 'verify', action: 'verifycomm',id: session[:id]%></li>
+
+<li class="Button"><%= link_to 'Verify Movie' ,controller: 'verify', action: 'verifymov',id: session[:id]%></li>
+<li class="Button"><%= form_tag 'srch', method: :post do %>
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <%= text_field_tag :tags  %>
+
+<%= submit_tag("Search") %>  
+<% end %></li>
+
+
+</ul>
+</div>
+  <!--<%= radio_button_tag :contactmethod, 'add_mov', :checked => true %> 
   <%= label :contactmethod_add_mov, 'Add Movies' %>
   <%= radio_button_tag :contactmethod, 'add_act' %>
   <%= label :contactmethod_verify_mov, 'Add Actors'%>
+  <%= radio_button_tag :contactmethod, 'add_dir' %>
+  <%= label :contactmethod_add_dir, 'Add Director'%>
   <%= radio_button_tag :contactmethod, 'verify_mov' %>
-  <%= label :contactmethod_verify_mov, 'Verify Movies'%>
+  <%= label :contactmethod_verify_mov, 'Verify_movies'%>
   <%= radio_button_tag :contactmethod, 'review_comments' %>
   <%= label :contactmethod_review_comments, 'Review Comments'%>
 	</br>
-    <%= submit_tag("OK") %>  
+    <%= submit_tag("OK") %>  -->
  </p>
 <% end %>
+
+<!---Welcome --->
+<div id="search"><h1>Welcome !
+<% 
+a1 = session[:id] 
+check = Admin.where(:id=>a1)
+if(session[:id].nil?) 
+ %>
+<meta http-equiv="refresh" content="0;url=http://localhost:3000" />
+<% else %>
+
+<%= check[0].fname %>
+<%= check[0].lname %>
+</h1></div>
+<div id="search1">
+<h1>Incomplete actors list : </h1>
+<table>
+<tr><th>First Name</th><th>Last Name</.th></tr>
+<%
+check = Cast.where(:dob=>nil)
+check.each do |x|
+%>
+<tr><td><%= x.fname %></td>
+<td><%= x.lname %></td>
+<td><pa><%= link_to 'EDIT' ,controller:'actors',action:'editactor' ,id:x.id %></pa> </td>
+<td><pa><%= link_to 'DELETE' ,controller:'actors',action:'destroy' ,id:x.id %> </pa></td>
+</tr>
+
+<%
+end
+%>
+<tr></tr>
+
+
+</table>
+
+
+
+<h1>Incomplete Directors list : </h1>
+<table>
+<tr><th>First Name</th><th>Last Name</.th></tr>
+<%
+check = Director.where(:dob=>nil)
+check.each do |y|
+%>
+<tr><td><%= y.fname %></td>
+<td><%= y.lname %></td>
+<td><pa><%= link_to 'EDIT' ,controller:'directors',action:'editdirector' ,id:y.id %> </pa></td>
+<td><pa><%= link_to 'DELETE' ,controller:'directors',action:'destroydir' ,id:y.id %></pa> </td>
+</tr>
+
+<%
+end
+%>
+<tr></tr>
+<% end %>
+
+</table>
+</div>
+</html>
