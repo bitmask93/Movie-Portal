@@ -68,9 +68,15 @@ check.each do |x|
 %>
 <div id="poster1"><img src="<%= "/"+ x.photo %>" style = "width:228px;height:228px;" ></img></br>
 <%= x.mn %></div><br/>
+</br>
 <%= x.dor %></td></tr>
-<td><%= link_to 'CONFIRM' ,controller:'verify',action:'movieadded' ,id:x.id %> </td>
-<td><%= link_to 'DELETE' ,controller:'verify',action:'moviedeleted' ,id:x.id %> </td>
+</br>
+<%= x.gen1 %>,
+<%= x.gen2 %>
+</br>
+<%= x.note %>
+<p><%= link_to 'CONFIRM' ,controller:'verify',action:'movieadded' ,id:x.id %></p> 
+<p><%= link_to 'DELETE' ,controller:'verify',action:'moviedeleted' ,id:x.id %></p> 
 </tr>
 
 <%
